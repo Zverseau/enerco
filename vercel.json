@@ -1,0 +1,13 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/dist/demo-green-energy.html"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/dist/:path*"
+    }
+  ]
+}
