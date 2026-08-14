@@ -3,11 +3,11 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/dist/demo-green-energy.html"
+      "destination": "/demo-green-energy.html"
     },
     {
       "source": "/:path*",
-      "destination": "/dist/:path*"
+      "destination": "/:path*"
     }
   ]
 }
