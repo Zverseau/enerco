@@ -4,10 +4,6 @@
     {
       "source": "/",
       "destination": "/demo-green-energy.html"
-    },
-    {
-      "source": "/:path*",
-      "destination": "/:path*"
     }
   ]
 }
