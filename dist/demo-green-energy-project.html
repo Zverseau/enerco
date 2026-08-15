@@ -1,29 +1,6 @@
 ﻿<!doctype html>
 <html class="no-js" lang="en">
     <head>
-        <title>Crafto - The Multipurpose HTML5 Template</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="author" content="ThemeZaa">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-        <meta name="description" content="Elevate your online presence with Crafto - a modern, versatile, multipurpose Bootstrap 5 responsive HTML5, SCSS template using highly creative 60+ ready demos.">
-        <!-- fav icon -->
-        <link rel="shortcut icon" href="img/fav.svg">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
-        <!-- google fonts preconnect -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <!-- style sheets and font icons  -->
-        <link rel="stylesheet" href="css/vendors.min.css"/>
-        <link rel="stylesheet" href="css/icon.min.css"/>
-        <link rel="stylesheet" href="css/style.css"/>
-        <link rel="stylesheet" href="css/responsive.css"/>
-        <link rel="stylesheet" href="demos/green-energy/green-energy.css"/>
-    </head>
-
-        <head>
         <title>Galerie | ENERCO</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -47,6 +24,196 @@
         <link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/responsive.css"/>
         <link rel="stylesheet" href="demos/green-energy/green-energy.css"/>
+
+        <!-- styles spécifiques à la galerie par projets -->
+        <style>
+            /* grille des cartes projets */
+            .projects-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+            @media (max-width: 991px) {
+                .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            @media (max-width: 575px) {
+                .projects-grid { grid-template-columns: 1fr; }
+            }
+
+            .project-card {
+                position: relative;
+                display: block;
+                width: 100%;
+                aspect-ratio: 4 / 3;
+                border-radius: 6px;
+                overflow: hidden;
+                cursor: pointer;
+                background-color: #1f2a24;
+                border: 0;
+                padding: 0;
+            }
+            .project-card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform 0.5s ease;
+            }
+            .project-card:hover img {
+                transform: scale(1.08);
+            }
+            .project-card .project-card-overlay {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: flex-end;
+                padding: 25px;
+                background: linear-gradient(to top, rgba(10, 20, 15, 0.85) 0%, rgba(10, 20, 15, 0.15) 55%, rgba(10, 20, 15, 0) 100%);
+            }
+            .project-card .project-card-info {
+                color: #fff;
+                text-align: left;
+            }
+            .project-card .project-card-title {
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 4px;
+            }
+            .project-card .project-card-count {
+                font-size: 13px;
+                opacity: 0.75;
+            }
+            .project-card .project-card-icon {
+                position: absolute;
+                top: 18px;
+                right: 18px;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.9);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+                color: #1f2a24;
+                opacity: 0;
+                transform: translateY(-8px);
+                transition: opacity 0.35s ease, transform 0.35s ease;
+            }
+            .project-card:hover .project-card-icon {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* modal de photos du projet */
+            .project-modal {
+                position: fixed;
+                inset: 0;
+                z-index: 9999;
+                display: none;
+            }
+            .project-modal.is-open {
+                display: block;
+            }
+            .project-modal-overlay {
+                position: absolute;
+                inset: 0;
+                background: rgba(8, 15, 12, 0.92);
+            }
+            .project-modal-content {
+                position: relative;
+                max-width: 1100px;
+                width: 92%;
+                margin: 5vh auto;
+                max-height: 90vh;
+                overflow-y: auto;
+                background: #fff;
+                border-radius: 8px;
+                padding: 35px;
+            }
+            .project-modal-close {
+                position: absolute;
+                top: 18px;
+                right: 18px;
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
+                border: 0;
+                background: #f2f2f2;
+                font-size: 22px;
+                line-height: 1;
+                cursor: pointer;
+                z-index: 2;
+            }
+            .project-modal-close:hover {
+                background: #e2e2e2;
+            }
+            .project-modal-title {
+                margin: 0 60px 4px 0;
+                font-weight: 600;
+            }
+            .project-modal-subtitle {
+                margin: 0 60px 20px 0;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: #4a5a52;
+                font-size: 14px;
+            }
+            .project-modal-description {
+                margin: 0 0 25px 0;
+                color: #444;
+                line-height: 1.6;
+            }
+            .project-modal-details {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 30px;
+            }
+            .project-modal-details tr {
+                border-bottom: 1px solid #ececec;
+            }
+            .project-modal-details tr:last-child {
+                border-bottom: 0;
+            }
+            .project-modal-details td {
+                padding: 10px 15px 10px 0;
+                vertical-align: top;
+                font-size: 15px;
+            }
+            .project-modal-details td.detail-label {
+                width: 220px;
+                font-weight: 600;
+                color: #1f2a24;
+            }
+            .project-modal-details td.detail-value {
+                color: #444;
+            }
+            @media (max-width: 575px) {
+                .project-modal-details td.detail-label {
+                    width: 140px;
+                }
+            }
+            .project-modal-photos {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 18px;
+            }
+            @media (max-width: 767px) {
+                .project-modal-photos { grid-template-columns: repeat(2, 1fr); }
+                .project-modal-content { padding: 20px; }
+            }
+            .project-modal-photos img {
+                width: 100%;
+                height: 220px;
+                object-fit: cover;
+                border-radius: 6px;
+                display: block;
+            }
+            body.project-modal-open {
+                overflow: hidden;
+            }
+        </style>
     </head>
 
     <body data-mobile-nav-style="classic">
@@ -188,480 +355,33 @@
                     </div>
                 </div>
             </div>
-        </section> 
+        </section>
         <!-- end page title -->
+
         <section class="bg-very-light-green">
             <div class="container" data-anime='{"opacity": [0,1], "duration": 600, "staggervalue": 300, "easing": "easeOutQuad" }'>
                 <div class="row">
                     <div class="col">
-                        <ul class="image-gallery-style-01 gallery-wrapper grid grid-3col xxl-grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large">
-                            <li class="grid-sizer"></li>
-
-                            <!-- start gallery item 1 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i1.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i1.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 1 -->
-
-                            <!-- start gallery item 2 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i2.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i2.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 2 -->
-
-                            <!-- start gallery item 3 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i3.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i3.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 3 -->
-
-                            <!-- start gallery item 4 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i4.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i4.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 4 -->
-
-                            <!-- start gallery item 5 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i5.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i5.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 5 -->
-
-                            <!-- start gallery item 6 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i6.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i6.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 6 -->
-
-                            <!-- start gallery item 7 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i7.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i7.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 7 -->
-
-                            <!-- start gallery item 8 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i8.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i8.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 8 -->
-
-                            <!-- start gallery item 9 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i9.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i9.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 9 -->
-
-                            <!-- start gallery item 10 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i10.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i10.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 10 -->
-
-                            <!-- start gallery item 11 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i15.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i15.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 11 -->
-
-                            <!-- start gallery item 12 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i12.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i12.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 12 -->
-
-                            <!-- start gallery item 13 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i13.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i13.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 13 -->
-
-                            <!-- start gallery item 14 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i14.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i14.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 14 -->
-
-                            <!-- start gallery item 15 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i15.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i15.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 15 -->
-
-                            <!-- start gallery item 16 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i16.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i16.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <!-- end gallery item 16 -->
-
-                            <!-- start gallery item 17 -->
-                            <li class="grid-item transition-inner-all">
-                                <div class="gallery-box border-radius-6px">
-                                    <a href="img/i17.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                        <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                            <img src="img/i17.jpeg" alt="" />
-                                            <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                                    <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-
-
-                            <!-- start gallery item 18 -->
-                    <li class="grid-item transition-inner-all">
-                        <div class="gallery-box border-radius-6px">
-                            <a href="img/i18.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                    <img src="img/i18.jpeg" alt="" />
-                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                        <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                            <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <!-- end gallery item 18 -->
-
-                    <!-- start gallery item 19 -->
-                    <li class="grid-item transition-inner-all">
-                        <div class="gallery-box border-radius-6px">
-                            <a href="img/i19.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                    <img src="img/i19.jpeg" alt="" />
-                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                        <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                            <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <!-- end gallery item 19 -->
-
-                    <!-- start gallery item 20 -->
-                    <li class="grid-item transition-inner-all">
-                        <div class="gallery-box border-radius-6px">
-                            <a href="img/i20.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                    <img src="img/i20.jpeg" alt="" />
-                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                        <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                            <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <!-- end gallery item 20 -->
-
-                    <!-- start gallery item 21 -->
-                    <li class="grid-item transition-inner-all">
-                        <div class="gallery-box border-radius-6px">
-                            <a href="img/i21.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                    <img src="img/i21.jpeg" alt="" />
-                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                        <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                            <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <!-- end gallery item 21 -->
-
-                    <!-- start gallery item 22 -->
-                    <li class="grid-item transition-inner-all">
-                        <div class="gallery-box border-radius-6px">
-                            <a href="img/i22.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                    <img src="img/i22.jpeg" alt="" />
-                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                        <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                            <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <!-- end gallery item 22 -->
-
-                    <!-- start gallery item 23 -->
-                    <li class="grid-item transition-inner-all">
-                        <div class="gallery-box border-radius-6px">
-                            <a href="img/i23.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                    <img src="img/i23.jpeg" alt="" />
-                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                        <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                            <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <!-- end gallery item 23 -->
-
-                    <!-- start gallery item 24 -->
-                    <li class="grid-item transition-inner-all">
-                        <div class="gallery-box border-radius-6px">
-                            <a href="img/i24.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                    <img src="img/i24.jpeg" alt="" />
-                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                        <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                            <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <!-- end gallery item 24 -->
-
-                    <!-- start gallery item 25 -->
-                    <li class="grid-item transition-inner-all">
-                        <div class="gallery-box border-radius-6px">
-                            <a href="img/i25.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                    <img src="img/i25.jpeg" alt="" />
-                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                        <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                            <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <!-- end gallery item 25 -->
-
-                    <!-- start gallery item 26 -->
-                    <li class="grid-item transition-inner-all">
-                        <div class="gallery-box border-radius-6px">
-                            <a href="img/i26.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                    <img src="img/i26.jpeg" alt="" />
-                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                        <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                            <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <!-- end gallery item 26 -->
-
-                    <!-- start gallery item 27 -->
-                    <li class="grid-item transition-inner-all">
-                        <div class="gallery-box border-radius-6px">
-                            <a href="img/i27.jpeg" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                    <img src="img/i27.jpeg" alt="" />
-                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                        <div class="d-flex align-items-center justify-content-center w-60px h-60px rounded-circle bg-white">
-                                            <i class="icon feather icon-feather-search icon-extra-medium text-dark-gray"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <!-- end gallery item 27 -->
-
-                        </ul>
+                        <!-- grille des projets (générée par JS depuis le tableau "projects" ci-dessous) -->
+                        <div class="projects-grid" id="projectsGrid"></div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- end section -->
+
+        <!-- modal : photos du projet sélectionné -->
+        <div class="project-modal" id="projectModal">
+            <div class="project-modal-overlay" id="projectModalOverlay"></div>
+            <div class="project-modal-content">
+                <button type="button" class="project-modal-close" id="projectModalClose" aria-label="Fermer">&times;</button>
+                <h3 class="project-modal-title" id="projectModalTitle"></h3>
+                <p class="project-modal-subtitle" id="projectModalSubtitle"></p>
+                <p class="project-modal-description" id="projectModalDescription"></p>
+                <table class="project-modal-details" id="projectModalDetails"></table>
+                <div class="project-modal-photos" id="projectModalPhotos"></div>
+            </div>
+        </div>
 
                 <!-- start footer -->
 <footer class="bg-dark-gray pb-30px">
@@ -839,7 +559,6 @@
 </footer>
 <!-- end footer -->
 
-
         <!-- start scroll progress -->
         <div class="scroll-progress d-none d-xxl-block">
             <a href="#" class="scroll-top" aria-label="scroll">
@@ -847,9 +566,153 @@
             </a>
         </div>
         <!-- end scroll progress -->
+
         <!-- javascript libraries -->
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/vendors.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
+
+        <!-- script de la galerie par projets -->
+        <script>
+            // ==========================================================
+            // A MODIFIER : liste des projets avec leurs vraies infos et
+            // photos. "cover" = photo affichée sur la card. "details"
+            // = les lignes du tableau (label / valeur), dans l'ordre
+            // où elles doivent apparaître.
+            // ==========================================================
+            const projects = [
+                {
+                    title: "Projet 1",
+                    subtitle: "Ville - Pays",
+                    description: "Courte description du projet.",
+                    cover: "img/i1.jpeg",
+                    details: [
+                        { label: "Type", value: "Rénovation et Aménagement Intérieurs" },
+                        { label: "Localisation", value: "Ville - PAYS" },
+                        { label: "Client", value: "Nom du client" },
+                        { label: "Surface", value: "0000 m²" },
+                        { label: "Coût des travaux", value: "- $ - HT" },
+                        { label: "Mission", value: "Mandataire / Mission Complète / En cours" },
+                        { label: "Année de réalisation", value: "0000 - 0000" }
+                    ],
+                    photos: [
+                        "img/i1.jpeg", "img/i2.jpeg", "img/i3.jpeg",
+                        "img/i4.jpeg", "img/i5.jpeg", "img/i6.jpeg",
+                        "img/i7.jpeg", "img/i8.jpeg", "img/i9.jpeg"
+                    ]
+                },
+                {
+                    title: "Projet 2",
+                    subtitle: "Ville - Pays",
+                    description: "Courte description du projet.",
+                    cover: "img/i10.jpeg",
+                    details: [
+                        { label: "Type", value: "Rénovation et Aménagement Intérieurs" },
+                        { label: "Localisation", value: "Ville - PAYS" },
+                        { label: "Client", value: "Nom du client" },
+                        { label: "Surface", value: "0000 m²" },
+                        { label: "Coût des travaux", value: "- $ - HT" },
+                        { label: "Mission", value: "Mandataire / Mission Complète / En cours" },
+                        { label: "Année de réalisation", value: "0000 - 0000" }
+                    ],
+                    photos: [
+                        "img/i10.jpeg", "img/i11.jpeg", "img/i12.jpeg",
+                        "img/i13.jpeg", "img/i14.jpeg", "img/i15.jpeg",
+                        "img/i16.jpeg", "img/i17.jpeg"
+                    ]
+                },
+                {
+                    title: "Projet 3",
+                    subtitle: "Ville - Pays",
+                    description: "Courte description du projet.",
+                    cover: "img/i18.jpeg",
+                    details: [
+                        { label: "Type", value: "Rénovation et Aménagement Intérieurs" },
+                        { label: "Localisation", value: "Ville - PAYS" },
+                        { label: "Client", value: "Nom du client" },
+                        { label: "Surface", value: "0000 m²" },
+                        { label: "Coût des travaux", value: "- $ - HT" },
+                        { label: "Mission", value: "Mandataire / Mission Complète / En cours" },
+                        { label: "Année de réalisation", value: "0000 - 0000" }
+                    ],
+                    photos: [
+                        "img/i18.jpeg", "img/i19.jpeg", "img/i20.jpeg",
+                        "img/i21.jpeg", "img/i22.jpeg", "img/i23.jpeg",
+                        "img/i24.jpeg", "img/i25.jpeg", "img/i26.jpeg", "img/i27.jpeg"
+                    ]
+                }
+            ];
+
+            const grid = document.getElementById("projectsGrid");
+            const modal = document.getElementById("projectModal");
+            const modalOverlay = document.getElementById("projectModalOverlay");
+            const modalClose = document.getElementById("projectModalClose");
+            const modalTitle = document.getElementById("projectModalTitle");
+            const modalSubtitle = document.getElementById("projectModalSubtitle");
+            const modalDescription = document.getElementById("projectModalDescription");
+            const modalDetails = document.getElementById("projectModalDetails");
+            const modalPhotos = document.getElementById("projectModalPhotos");
+
+            function openProject(project) {
+                modalTitle.textContent = project.title;
+
+                modalSubtitle.textContent = project.subtitle || "";
+                modalSubtitle.style.display = project.subtitle ? "" : "none";
+
+                modalDescription.textContent = project.description || "";
+                modalDescription.style.display = project.description ? "" : "none";
+
+                const details = project.details || [];
+                modalDetails.innerHTML = details
+                    .map(function (row) {
+                        return (
+                            "<tr>" +
+                            '<td class="detail-label">' + row.label + " :</td>" +
+                            '<td class="detail-value">' + row.value + "</td>" +
+                            "</tr>"
+                        );
+                    })
+                    .join("");
+                modalDetails.style.display = details.length ? "" : "none";
+
+                modalPhotos.innerHTML = project.photos
+                    .map(function (src) {
+                        return '<img src="' + src + '" alt="' + project.title + '" loading="lazy" />';
+                    })
+                    .join("");
+                modal.classList.add("is-open");
+                document.body.classList.add("project-modal-open");
+            }
+
+            function closeProject() {
+                modal.classList.remove("is-open");
+                document.body.classList.remove("project-modal-open");
+            }
+
+            projects.forEach(function (project) {
+                const card = document.createElement("button");
+                card.type = "button";
+                card.className = "project-card";
+                card.innerHTML =
+                    '<img src="' + project.cover + '" alt="' + project.title + '" loading="lazy" />' +
+                    '<span class="project-card-icon"><i class="icon feather icon-feather-plus"></i></span>' +
+                    '<span class="project-card-overlay">' +
+                        '<span class="project-card-info">' +
+                            '<span class="project-card-title">' + project.title + '</span><br/>' +
+                            '<span class="project-card-count">' + project.photos.length + ' photos</span>' +
+                        '</span>' +
+                    '</span>';
+                card.addEventListener("click", function () {
+                    openProject(project);
+                });
+                grid.appendChild(card);
+            });
+
+            modalClose.addEventListener("click", closeProject);
+            modalOverlay.addEventListener("click", closeProject);
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape") closeProject();
+            });
+        </script>
     </body>
 </html>
