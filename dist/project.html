@@ -1,12 +1,12 @@
 ﻿<!doctype html>
 <html class="no-js" lang="en">
     <head>
-        <title>Galerie | ENERCO</title>
+        <title>Nos Réalisations | Projets ENERCO au Togo & Afrique de l'Ouest</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="author" content="ENERCO Energy Consult">
         <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-        <meta name="description" content="ENERCO accompagne ses clients dans la conception, la réalisation et l'optimisation des installations électriques, des réseaux de distribution et des systèmes énergétiques.">
+        <meta name="description" content="Découvrez les projets réalisés par ENERCO Energy Consult : réseaux électriques, efficacité énergétique et travaux BTP menés au Togo et en Afrique de l'Ouest.">
 
         <!-- fav icon -->
         <link rel="shortcut icon" href="img/fav.svg">
@@ -25,195 +25,7 @@
         <link rel="stylesheet" href="css/responsive.css"/>
         <link rel="stylesheet" href="demos/green-energy/green-energy.css"/>
 
-        <!-- styles spécifiques à la galerie par projets -->
-        <style>
-            /* grille des cartes projets */
-            .projects-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 30px;
-            }
-            @media (max-width: 991px) {
-                .projects-grid { grid-template-columns: repeat(2, 1fr); }
-            }
-            @media (max-width: 575px) {
-                .projects-grid { grid-template-columns: 1fr; }
-            }
 
-            .project-card {
-                position: relative;
-                display: block;
-                width: 100%;
-                aspect-ratio: 4 / 3;
-                border-radius: 6px;
-                overflow: hidden;
-                cursor: pointer;
-                background-color: #1f2a24;
-                border: 0;
-                padding: 0;
-            }
-            .project-card img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                display: block;
-                transition: transform 0.5s ease;
-            }
-            .project-card:hover img {
-                transform: scale(1.08);
-            }
-            .project-card .project-card-overlay {
-                position: absolute;
-                inset: 0;
-                display: flex;
-                align-items: flex-end;
-                padding: 25px;
-                background: linear-gradient(to top, rgba(10, 20, 15, 0.85) 0%, rgba(10, 20, 15, 0.15) 55%, rgba(10, 20, 15, 0) 100%);
-            }
-            .project-card .project-card-info {
-                color: #fff;
-                text-align: left;
-            }
-            .project-card .project-card-title {
-                font-size: 20px;
-                font-weight: 600;
-                margin-bottom: 4px;
-            }
-            .project-card .project-card-count {
-                font-size: 13px;
-                opacity: 0.75;
-            }
-            .project-card .project-card-icon {
-                position: absolute;
-                top: 18px;
-                right: 18px;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.9);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 16px;
-                color: #1f2a24;
-                opacity: 0;
-                transform: translateY(-8px);
-                transition: opacity 0.35s ease, transform 0.35s ease;
-            }
-            .project-card:hover .project-card-icon {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            /* modal de photos du projet */
-            .project-modal {
-                position: fixed;
-                inset: 0;
-                z-index: 9999;
-                display: none;
-            }
-            .project-modal.is-open {
-                display: block;
-            }
-            .project-modal-overlay {
-                position: absolute;
-                inset: 0;
-                background: rgba(8, 15, 12, 0.92);
-            }
-            .project-modal-content {
-                position: relative;
-                max-width: 1100px;
-                width: 92%;
-                margin: 5vh auto;
-                max-height: 90vh;
-                overflow-y: auto;
-                background: #fff;
-                border-radius: 8px;
-                padding: 35px;
-            }
-            .project-modal-close {
-                position: absolute;
-                top: 18px;
-                right: 18px;
-                width: 42px;
-                height: 42px;
-                border-radius: 50%;
-                border: 0;
-                background: #f2f2f2;
-                font-size: 22px;
-                line-height: 1;
-                cursor: pointer;
-                z-index: 2;
-            }
-            .project-modal-close:hover {
-                background: #e2e2e2;
-            }
-            .project-modal-title {
-                margin: 0 60px 4px 0;
-                font-weight: 600;
-            }
-            .project-modal-subtitle {
-                margin: 0 60px 20px 0;
-                font-weight: 500;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-                color: #4a5a52;
-                font-size: 14px;
-            }
-            .project-modal-description {
-                margin: 0 0 25px 0;
-                color: #444;
-                line-height: 1.6;
-            }
-            .project-modal-details {
-                width: 100%;
-                border-collapse: collapse;
-                margin-bottom: 30px;
-            }
-            .project-modal-details tr {
-                border-bottom: 1px solid #ececec;
-            }
-            .project-modal-details tr:last-child {
-                border-bottom: 0;
-            }
-            .project-modal-details td {
-                padding: 10px 15px 10px 0;
-                vertical-align: top;
-                font-size: 15px;
-            }
-            .project-modal-details td.detail-label {
-                width: 220px;
-                font-weight: 600;
-                color: #1f2a24;
-            }
-            .project-modal-details td.detail-value {
-                color: #444;
-            }
-            @media (max-width: 575px) {
-                .project-modal-details td.detail-label {
-                    width: 140px;
-                }
-            }
-            .project-modal-photos {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 18px;
-            }
-            @media (max-width: 767px) {
-                .project-modal-photos { grid-template-columns: repeat(2, 1fr); }
-                .project-modal-content { padding: 20px; }
-            }
-            .project-modal-photos img {
-                width: 100%;
-                height: 220px;
-                object-fit: cover;
-                border-radius: 6px;
-                display: block;
-            }
-            body.project-modal-open {
-                overflow: hidden;
-            }
-        </style>
     </head>
 
     <body data-mobile-nav-style="classic">
@@ -345,7 +157,7 @@
             <div class="container-fluid p-0">
                 <div class="row justify-content-center small-screen sm-h-400px g-0">
                     <div class="col-md-6 d-flex justify-content-center flex-column ps-7 pe-15px sm-ps-15px cover-background text-white text-md-start text-center page-title-large" style="background-image: url('img/demo-green-energy-about-title-left-bg-01.jpg');" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
-                        <h1 class="fw-600 mb-10px ls-minus-2px">Galerie</h1>
+                        <h1 class="fw-600 mb-10px ls-minus-2px">Nos réalisations</h1>
                         <h2 class="opacity-6 mb-0 fw-300">Quelques images de nos réalisations</h2>
                     </div>
                     <div class="col-md-6">
