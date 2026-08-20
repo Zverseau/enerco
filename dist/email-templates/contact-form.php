@@ -142,8 +142,9 @@ if( ! empty( $_POST['email'] ) ) {
 			$mail->SMTPSecure = 'ssl';
 			$mail->Port     = 465;
 			$mail->CharSet  = 'UTF-8';
-			$mail->setFrom( $fields['Email'], $fields['Name'] );
-			
+			$mail->setFrom( $receiver_email, $receiver_name );
+			$mail->addReplyTo( $fields['Email'], $fields['Name'] );
+
 			foreach( $toemailaddresses as $toemailaddress ) {
 				$mail->AddAddress( $toemailaddress['email'], $toemailaddress['name'] );
 			}
