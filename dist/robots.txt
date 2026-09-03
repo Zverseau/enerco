@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.ton-domaine.com/sitemap.xml
+Sitemap: https://www.enerco-tg.com/sitemap.xml
