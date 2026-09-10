@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.enerco-tg.com/sitemap.xml
+Disallow: /dist/
+Disallow: /email-templates/
+
+Sitemap: https://enerco-tg.com/sitemap.xml

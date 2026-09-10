@@ -2,39 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>https://www.enerco-tg.com/index.html</loc>
+        <loc>https://enerco-tg.com/</loc>
+        <priority>1.0</priority>
     </url>
 
     <url>
-        <loc>https://www.enerco-tg.com/about.html</loc>
+        <loc>https://enerco-tg.com/about.html</loc>
+        <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.enerco-tg.com/contact.html</loc>
+        <loc>https://enerco-tg.com/project.html</loc>
+        <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.enerco-tg.com/project.html</loc>
+        <loc>https://enerco-tg.com/contact.html</loc>
+        <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.enerco-tg.com/electricite-reseaux-electriques.html</loc>
+        <loc>https://enerco-tg.com/electricite-reseaux-electriques.html</loc>
+        <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.enerco-tg.com/domotique-batiment-connecte.html</loc>
+        <loc>https://enerco-tg.com/domotique-batiment-connecte.html</loc>
+        <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.enerco-tg.com/energie-efficacite-energétique.html</loc>
+        <loc>https://enerco-tg.com/energie-efficacite-energetique.html</loc>
+        <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.enerco-tg.com/assistance-maîtrise-ouvrage.html</loc>
+        <loc>https://enerco-tg.com/assistance-maitrise-ouvrage.html</loc>
+        <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.enerco-tg.com/eom-eol-management.html</loc>
+        <loc>https://enerco-tg.com/eom-eol-management.html</loc>
+        <priority>0.8</priority>
     </url>
 
 </urlset>
